@@ -1,17 +1,17 @@
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class BJ15649_N_M_1 {
+public class BJ15651_N과M3 {
 
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	static StringTokenizer st;
 	static StringBuilder sb = new StringBuilder();
+	static StringTokenizer st;
 
 	static int N, M;
 	static int[] map;
-	static boolean[] visited;
 
 	public static void main(String[] args) throws IOException {
 		st = new StringTokenizer(br.readLine().trim(), " ");
@@ -19,12 +19,11 @@ public class BJ15649_N_M_1 {
 		M = Integer.parseInt(st.nextToken());
 
 		map = new int[N];
-		visited = new boolean[N];
-		makePermutation(0, 0);
+		dfs(0);
 		System.out.println(sb);
 	}
 
-	private static void makePermutation(int toChoose, int depth) {
+	private static void dfs(int depth) {
 		if (depth == M) {
 			for (int i = 0; i < M; i++) {
 				sb.append(map[i] + " ");
@@ -33,13 +32,9 @@ public class BJ15649_N_M_1 {
 			return;
 		}
 
-		for (int j = 0; j < map.length; j++) {
-			if (!visited[j]) {
-				visited[j] = true;
-				map[depth] = j + 1;
-				makePermutation(toChoose, depth + 1);
-				visited[j] = false;
-			}
+		for (int i = 0; i < map.length; i++) {
+			map[depth] = i + 1;
+			dfs(depth+1);
 		}
 	}
 
